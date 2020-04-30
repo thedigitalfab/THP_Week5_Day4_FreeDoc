@@ -70,10 +70,10 @@ doctors = []
     doctor = Doctor.create(
         first_name: Faker::Name.first_name,
         last_name: Faker::Name.last_name,
-        city_id: cities[rand(0..24)]
+        city_id: cities[rand(0..24)].id
     )
-    DoctorSpeciality.create(doctor_id: doctor ,speciality_id: specialities[rand(0..7)])
-    DoctorSpeciality.create(doctor_id: doctor ,speciality_id: specialities[rand(8..15)])
+    DoctorSpeciality.create(doctor_id: doctor.id ,speciality_id: specialities[rand(0..7)].id)
+    DoctorSpeciality.create(doctor_id: doctor.id ,speciality_id: specialities[rand(8..15)].id)
     doctors << doctor
 end
 
@@ -83,17 +83,17 @@ patients = []
     patient = Patient.create(
         first_name: Faker::Name.first_name,
         last_name: Faker::Name.last_name,
-        city_id: cities[rand(0..24)]
+        city_id: cities[rand(0..24)].id
     )
-    doctors << doctor
+    patients << patient
 end
 
 # Randomly create appointments:
 500.times do
     Appointment.create(
         date: Faker::Date.forward(days: 90),
-        doctor_id: doctors[rand(0..24)],
-        patient_id: patients[rand(0..199)],
-        city_id: cities[rand(0..24)]
+        doctor_id: doctors[rand(0..24)].id,
+        patient_id: patients[rand(0..199)].id,
+        city_id: cities[rand(0..24)].id
     )
 end
